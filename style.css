@@ -83,3 +83,9 @@ button:active {
     font-size: xx-large;
     font-weight: 800;
 }
+#MsgLose{
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 800;
+    display: 'none';
+}

@@ -1,27 +1,38 @@
 let intentos = 6;
+const URLAPi = "https://random-word-api.herokuapp.com/word?length=5&&lang=es"
+const CANTLETRAS = 5
 let diccionario = ["PANAL", "CHRIS", "LLAVE", "RELOJ", "HUESO"]
 const palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
-const CANTLETRAS = 5
 const BUTTON = document.getElementById('botonInput')
 const ERROR = document.getElementById('error')
+const MSGLOSe = document.getElementById('MsgLose')
+//obtenemos un valor de la api
+// fetch(URLAPi).then(respone => response.json() )
+// .then(response =>{
+//     palabra = removeAccents(response[0].toUpperCase())
+//     console.log("Api:",palabra)
+// })
+// .catch(err =>{
+//     console.log('hubo un problema con la api')
+//     let diccionario = ["PANAL", "CHRIS", "LLAVE", "RELOJ", "HUESO"]
+//     palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
+//     })
 // Creación del evento para iniciar el juego
 BUTTON.addEventListener('click', intentar)
 
 // Función encargada de recibir el intento, procesarlo y establecer los resultados
 function intentar() {
     const INTENTO = leerIntento();
-    console.log(INTENTO)
     if ((tamañoControl(INTENTO))) {
         ERROR.style.display = 'none'
         intentoManager(INTENTO);
     }
     else {
         ERROR.style.display = 'block'
-        console.log('tamaño incorrecto')
     }
     //Limpiar la caja de input para que el usuario ingrese el siguiente valor
-    const BOX=document.getElementById("usuarioInput");
-    BOX.value=""
+    const BOX = document.getElementById("usuarioInput");
+    BOX.value = ""
 }
 
 
@@ -62,17 +73,14 @@ function letrasControl(intento) {
         if (intento[s] == palabra[s]) {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'green';
-            console.log(intento[s] + ' VERDE')
         }
         else if (palabra.includes(intento[s])) {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'yellow';
-            console.log(intento[s] + ' AMARILLO')
         }
         else {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'gray';
-            console.log(intento[s] + ' GRIS')
         }
         FILA.appendChild(SPAN)
     }
@@ -91,6 +99,9 @@ function intentoManager(intento) {
         intentos -= 1;
         if (intentos == 0) {
             terminar('😪 PERDISTE!')
+            MSGLOSe.style.display = 'block'
+            MSGLOSe.innerHTML = "La Palabra Correcta era: " + palabra
+
         }
     }
 }
