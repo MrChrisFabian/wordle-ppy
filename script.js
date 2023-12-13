@@ -3,9 +3,6 @@ let palabra = "PANAL"
 const CANTLETRAS = 5
 const BUTTON = document.getElementById('botonInput')
 const ERROR = document.getElementById('error')
-const GRILLA = document.getElementById('grilla')
-const FILA = document.createElement('div')
-FILA.className='fila';
 // Creación del evento para iniciar el juego
 BUTTON.addEventListener('click', intentar)
 
@@ -52,21 +49,23 @@ function palabraControl(intento) {
 }
 // Función encargada de establecer cuales letras son correctas
 function letrasControl(intento) {
-
+    const GRILLA = document.getElementById('grilla')
+    const FILA = document.createElement('div')
+    FILA.className = 'row';
     for (let s in intento) {
-        const SPAN =document.createElement('span')
-        SPAN.className='letra'
-        if(intento[s] == palabra[s]){
+        const SPAN = document.createElement('span')
+        SPAN.className = 'letter'
+        if (intento[s] == palabra[s]) {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'green';
             console.log(intento[s] + ' VERDE')
         }
-        else if (palabra.includes(intento[s])){
+        else if (palabra.includes(intento[s])) {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'yellow';
             console.log(intento[s] + ' AMARILLO')
         }
-        else{
+        else {
             SPAN.innerHTML = intento[s]
             SPAN.style.backgroundColor = 'gray';
             console.log(intento[s] + ' GRIS')
@@ -74,7 +73,7 @@ function letrasControl(intento) {
         FILA.appendChild(SPAN)
     }
     GRILLA.appendChild(FILA)
-  
+
 }
 function intentoManager(intento) {
     if (intento == palabra) {
@@ -83,19 +82,19 @@ function intentoManager(intento) {
         terminar('GANASTE!')
         intentos -= 1;
     }
-    else{
+    else {
         letrasControl(intento);
-        intentos -=1;
-        if(intentos == 0){
+        intentos -= 1;
+        if (intentos == 0) {
             terminar('PERDISTE!')
         }
     }
 }
 
-function terminar(mensaje){
+function terminar(mensaje) {
     let INTENTO = document.getElementById("usuarioInput");
-    INTENTO.disabled=true;
-    BUTTON.disabled=true;
+    INTENTO.disabled = true;
+    BUTTON.disabled = true;
     let contenedor = document.getElementById('intentos');
     contenedor.innerHTML = mensaje
 }
