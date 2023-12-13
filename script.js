@@ -1,5 +1,6 @@
 let intentos = 6;
-let palabra = "PANAL"
+let diccionario = ["PANAL", "CHRIS", "LLAVE", "RELOJ", "HUESO"]
+const palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
 const CANTLETRAS = 5
 const BUTTON = document.getElementById('botonInput')
 const ERROR = document.getElementById('error')
