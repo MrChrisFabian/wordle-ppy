@@ -19,6 +19,9 @@ function intentar() {
         ERROR.style.display = 'block'
         console.log('tamaño incorrecto')
     }
+    //Limpiar la caja de input para que el usuario ingrese el siguiente valor
+    const BOX=document.getElementById("usuarioInput");
+    BOX.value=""
 }
 
 
