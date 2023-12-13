@@ -79,14 +79,14 @@ function intentoManager(intento) {
     if (intento == palabra) {
         letrasControl(intento);
         console.log('GANASTE!')
-        terminar('GANASTE!')
+        terminar('😎 GANASTE!')
         intentos -= 1;
     }
     else {
         letrasControl(intento);
         intentos -= 1;
         if (intentos == 0) {
-            terminar('PERDISTE!')
+            terminar('😪 PERDISTE!')
         }
     }
 }
