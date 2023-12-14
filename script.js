@@ -2,21 +2,23 @@ let intentos = 6;
 const URLAPi = "https://random-word-api.herokuapp.com/word?length=5&&lang=es"
 const CANTLETRAS = 5
 let diccionario = ["PANAL", "CHRIS", "LLAVE", "RELOJ", "HUESO"]
-const palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
+let palabra;
 const BUTTON = document.getElementById('botonInput')
 const ERROR = document.getElementById('error')
 const MSGLOSe = document.getElementById('MsgLose')
-//obtenemos un valor de la api
-// fetch(URLAPi).then(respone => response.json() )
-// .then(response =>{
-//     palabra = removeAccents(response[0].toUpperCase())
-//     console.log("Api:",palabra)
-// })
-// .catch(err =>{
-//     console.log('hubo un problema con la api')
-//     let diccionario = ["PANAL", "CHRIS", "LLAVE", "RELOJ", "HUESO"]
-//     palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
-//     })
+//obtenemos un valor de la api que sera la palabra a adivinar
+fetch(URLAPi)
+.then(resp => resp.json())
+.then(response => {
+    palabra = response[0].toUpperCase()
+    console.log('Palabra API:' + response[0].toUpperCase())
+})
+//Atrapamos el error en caso de que hubieses
+.catch(err => {console.log('Problemas con la api')
+//Si no conectamos la api utilizaremos alguno de los valores predeterminados para el juego
+ palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
+}
+)
 // Creación del evento para iniciar el juego
 BUTTON.addEventListener('click', intentar)
 
@@ -87,6 +89,7 @@ function letrasControl(intento) {
     GRILLA.appendChild(FILA)
 
 }
+//Función que maneja maneja cuando terminara el juego ya sea ganando o quedandose sin intentos
 function intentoManager(intento) {
     if (intento == palabra) {
         letrasControl(intento);
@@ -105,7 +108,7 @@ function intentoManager(intento) {
         }
     }
 }
-
+//Función encarga de finalizar el juego mostrando un mensaje y bloqueando los botones
 function terminar(mensaje) {
     let INTENTO = document.getElementById("usuarioInput");
     INTENTO.disabled = true;
